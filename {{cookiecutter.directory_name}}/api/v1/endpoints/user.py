@@ -8,6 +8,7 @@ from api import deps
 
 router = APIRouter()
 
+
 @router.post("/", response_model=schemas.User)
 async def create_user(
     *,
@@ -23,10 +24,7 @@ async def create_user(
 
 @router.put("/{id}", response_model=schemas.User)
 async def update_user(
-    *,
-    db: Session = Depends(deps.get_db),
-    id: int,
-    user_in: schemas.UserUpdate
+    *, db: Session = Depends(deps.get_db), id: int, user_in: schemas.UserUpdate
 ) -> Any:
     """
     Update an item.
@@ -36,14 +34,12 @@ async def update_user(
         raise HTTPException(status_code=404, detail="User not found")
     user = await crud.user.update(db=db, db_obj=user, obj_in=user_in)
     return user
+
+
 #
 #
 @router.get("/{id}", response_model=schemas.User)
-async def read_user(
-    *,
-    db: Session = Depends(deps.get_db),
-    id: int
-) -> Any:
+async def read_user(*, db: Session = Depends(deps.get_db), id: int) -> Any:
     """
     Get item by ID.
     """

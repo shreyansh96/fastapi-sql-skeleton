@@ -26,5 +26,6 @@ class UserUpdate(UserBase):
 # Properties to return to client
 class User(UserBase):
     id: int
+
     class Config:
         orm_mode = True
